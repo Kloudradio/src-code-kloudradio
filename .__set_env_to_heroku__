@@ -33,7 +33,7 @@ RACK_TIMEOUT_SERVICE_TIMEOUT=5
 
 # Required by the Postgres Docker image. This sets up the initial database when
 # you first run it.
-POSTGRES_USER=herocker
+POSTGRES_USER=kloudradio
 POSTGRES_PASSWORD=yourpassword
 
 # The database name will automatically get the Rails environment appended to it
@@ -73,7 +73,7 @@ ACTIVE_JOB_URL=redis://:yourpassword@redis:6379/0
 
 # The queue prefix for all Active Jobs. The Rails environment will
 # automatically be added to this value.
-ACTIVE_JOB_QUEUE_PREFIX=herocker:jobs
+ACTIVE_JOB_QUEUE_PREFIX=Kloudradio:jobs
 
 # The full Redis URL for Action Cable's back-end.
 ACTION_CABLE_BACKEND_URL=redis://:yourpassword@redis:6379/0

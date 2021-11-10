@@ -1,4 +1,5 @@
 #!/bin/bash
+cd kloudradio
 heroku login
 docker-compose up --build -d
 docker-compose exec website rails db:create db:migrate
