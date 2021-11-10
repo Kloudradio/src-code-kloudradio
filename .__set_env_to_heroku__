@@ -1,7 +1,7 @@
 # This is used by Docker Compose to set up prefix names for Docker images,
 # containers, volumes and networks. This ensures that everything is named
 # consistently regardless of your folder structure.
-COMPOSE_PROJECT_NAME=herocker
+COMPOSE_PROJECT_NAME=kloudradio
 
 # What Rails environment are we in?
 RAILS_ENV=development
