@@ -38,7 +38,7 @@ POSTGRES_PASSWORD=yourpassword
 
 # The database name will automatically get the Rails environment appended to it
 # such as: herocker_development or herocker_production.
-DATABASE_URL=postgresql://herocker:yourpassword@postgres:5432/herocker?encoding=utf8&pool=5&timeout=5000
+DATABASE_URL=postgresql://kloudradio:yourpassword@postgres:5432/herocker?encoding=utf8&pool=5&timeout=5000
 
 # The full Redis URL for the Redis cache.
 REDIS_CACHE_URL=redis://:yourpassword@redis:6379/0
