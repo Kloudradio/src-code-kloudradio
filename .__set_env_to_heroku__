@@ -1,95 +1,117 @@
-# This is used by Docker Compose to set up prefix names for Docker images,
-# containers, volumes and networks. This ensures that everything is named
-# consistently regardless of your folder structure.
-COMPOSE_PROJECT_NAME=kloudradio
+# Default values are optimized for production to avoid having to configure
+# much in production.
+#
+# However it should be easy to get going in development too. If you see an
+# uncommented option that means it's either mandatory to set or it's being
+# overwritten in development to make your life easier.
 
-# What Rails environment are we in?
-RAILS_ENV=development
+# Rather than use the directory name, let's control the name of the project.
+export COMPOSE_PROJECT_NAME=kloudradio
 
-# Rails log level.
-#   Accepted values: debug, info, warn, error, fatal, or unknown
-LOG_LEVEL=debug
+# You can generate a more secure secret by running: ./run rails secret
+export SECRET_KEY_BASE=insecure_key_for_dev
 
-# You would typically use `rails secret` to generate a secure token. It is
-# critical that you keep this value private in production.
-SECRET_TOKEN=asecuretokenwouldnormallygohere
+# Which environment is running? These should be "development" or "production".
+#export RAILS_ENV=production
+#export NODE_ENV=production
+export RAILS_ENV=development
+export NODE_ENV=development
 
-# More details about these Puma variables can be found in config/puma.rb.
-# Which address should the Puma app server bind to?
-BIND_ON=0.0.0.0:3000
+# The bind port for puma.
+#
+# Be warned that if you change this value you'll need to change 8000 in both
+# your Dockerfile and in a few spots in docker-compose.yml due to the nature of
+# how this value can be set (Docker Compose doesn't support nested ENV vars).
+#export PORT=8000
 
-# Puma supports multiple threads but in development mode you'll want to use 1
-# thread to ensure that you can properly debug your application.
-RAILS_MAX_THREADS=1
+# How many workers and threads should your app use? WEB_CONCURRENCY defaults
+# to the server's CPU count * 2. That is a good starting point. In development
+# it's a good idea to use 1 to avoid race conditions when debugging.
+#export WEB_CONCURRENCY=
+#export RAILS_MAX_THREADS=5
+export WEB_CONCURRENCY=1
+export RAILS_MAX_THREADS=1
 
-# Puma supports multiple workers but you should stick to 1 worker in dev mode.
-WEB_CONCURRENCY=1
+# You'll always want to set POSTGRES_USER and POSTGRES_PASSWORD since the
+# postgres Docker image uses them for its default database user and password.
+export POSTGRES_USER=byjdp
+export POSTGRES_PASSWORD=password
+#export POSTGRES_HOST=postgres
+#export POSTGRES_PORT=5432
+export POSTGRES_DB=$COMPOSE_PROJECT_NAME
 
-# Requests that exceed 5 seconds will be terminated and dumped to a stacktrace.
-# Feel free to modify this value to fit the needs of your project, but if you
-# have any request that takes more than 5 seconds you probably need to re-think
-# what you are doing 99.99% of the time.
-RACK_TIMEOUT_SERVICE_TIMEOUT=5
+# What's your full Redis connection URL? This will be used for caching, Sidekiq,
+# and Action Cable. You can always split them up later.
+#export REDIS_URL=redis://redis:6379/1
 
-# Required by the Postgres Docker image. This sets up the initial database when
-# you first run it.
-POSTGRES_USER=kloudradio
-POSTGRES_PASSWORD=yourpassword
+# The bind port for puma but for Action Cable.
+#
+# Be warned that if you change this value you'll need to change 28080 in a few
+# spots in docker-compose.yml due to the nature of how this value can be set
+# (Docker Compose doesn't support nested ENV vars).
+#export CABLE_PORT=28080
 
-# The database name will automatically get the Rails environment appended to it
-# such as: herocker_development or herocker_production.
-DATABASE_URL=postgresql://kloudradio:yourpassword@postgres:5432/kloudradio?encoding=utf8&pool=5&timeout=5000
+# The Action Cable address that will be accessible over HTTP. In production
+# you would typically have this reverse proxied to a sub-domain with nginx, in
+# which case you would set something like: ws://cable.example.com
+#
+# This is one case where it defaults to a development value because it's not
+# possible for me to know what domain name you'll be using.
+#export ACTION_CABLE_FRONTEND_URL=ws://localhost:28080
 
-# The full Redis URL for the Redis cache.
-REDIS_CACHE_URL=redis://:yourpassword@redis:6379/0
-
-# The namespace used by the Redis cache.
-REDIS_CACHE_NAMESPACE=cache
-
-# Action mailer (e-mail) settings.
-# You will need to enable less secure apps in your Google account if you plan
-# to use GMail as your e-mail SMTP server.
-# You can do that here: https://www.google.com/settings/security/lesssecureapps
-SMTP_ADDRESS=smtp.gmail.com
-SMTP_PORT=587
-SMTP_DOMAIN=gmail.com
-SMTP_USERNAME=you@gmail.com
-SMTP_PASSWORD=yourpassword
-SMTP_AUTH=plain
-SMTP_ENABLE_STARTTLS_AUTO=true
-
-# Not running Docker natively? Replace 'localhost' with your Docker Machine IP
-# address, such as: 192.168.99.100:3000
-ACTION_MAILER_HOST=localhost:3000
-ACTION_MAILER_DEFAULT_FROM=you@gmail.com
-ACTION_MAILER_DEFAULT_TO=you@gmail.com
-
-# Google Analytics universal ID. You should only set this in non-development
-# environments. You wouldn't want to track development mode requests in GA.
-# GOOGLE_ANALYTICS_UA='xxx'
-
-# The full Redis URL for Active Job.
-ACTIVE_JOB_URL=redis://:yourpassword@redis:6379/0
-
-# The queue prefix for all Active Jobs. The Rails environment will
-# automatically be added to this value.
-ACTIVE_JOB_QUEUE_PREFIX=Kloudradio:jobs
-
-# The full Redis URL for Action Cable's back-end.
-ACTION_CABLE_BACKEND_URL=redis://:yourpassword@redis:6379/0
-
-# The full WebSocket URL for Action Cable's front-end.
-# Not running Docker natively? Replace 'localhost' with your Docker Machine IP
-# address, such as: ws://192.168.99.100:28080
-ACTION_CABLE_FRONTEND_URL=ws://localhost:28080
-
-# Comma separated list of RegExp origins to allow connections from.
-# These values will be converted into a proper RegExp, so omit the / /.
+# Comma separated list of RegExp origins to allow connections from for Action
+# Cable. The values will be converted into a proper RegExp, so omit the / /.
 #
 # Examples:
 #   http:\/\/localhost*
 #   http:\/\/example.*,https:\/\/example.*
+#export ACTION_CABLE_ALLOWED_REQUEST_ORIGINS=http:\/\/localhost*
+
+# If this is set then Rails will serve files from public/ in production. You
+# probably don't want this behavior unless you're testing prod mode locally,
+# because nginx would typically serve static files.
+#export RAILS_SERVE_STATIC_FILES=
+
+# Should Docker restart your containers if they go down in unexpected ways?
+#export DOCKER_RESTART_POLICY=unless-stopped
+export DOCKER_RESTART_POLICY=no
+
+# What health check test command do you want to run? In development, having it
+# curl your web server will result in a lot of log spam, so setting it to
+# /bin/true is an easy way to make the health check do basically nothing.
+#export DOCKER_WEB_HEALTHCHECK_TEST=curl localhost:8000/up
+export DOCKER_WEB_HEALTHCHECK_TEST=/bin/true
+
+# What ip:port should be published back to the Docker host for the app server?
+# If you're using Docker Toolbox or a custom VM you can't use 127.0.0.1. This
+# is being overwritten in dev to be compatible with more dev environments.
 #
-# Not running Docker natively? Replace 'localhost' with your Docker Machine IP
-# address, such as: http:\/\/192.168.99.100*
-ACTION_CABLE_ALLOWED_REQUEST_ORIGINS=http:\/\/localhost*
+# If you have a port conflict because something else is using 8000 then you
+# can either stop that process or change 8000 to be something else.
+#
+# Use the default in production to avoid having gunicorn directly accessible to
+# the internet since it'll very likely be behind nginx or a load balancer.
+#export DOCKER_WEB_PORT_FORWARD=127.0.0.1:8000
+export DOCKER_WEB_PORT_FORWARD=8000
+
+# This is the same as above except for Action Cable.
+#export DOCKER_CABLE_PORT_FORWARD=127.0.0.1:28080
+export DOCKER_CABLE_PORT_FORWARD=28080
+
+# What volume path should be used? In dev we want to volume mount everything
+# so that we can develop our code without rebuilding our Docker images.
+#export DOCKER_WEB_VOLUME=./public:/app/public
+export DOCKER_WEB_VOLUME=.:/app
+
+# What CPU and memory constraints will be added to your services? When left at
+# 0 they will happily use as much as needed.
+# export DOCKER_POSTGRES_CPUS=0
+# export DOCKER_POSTGRES_MEMORY=0
+# export DOCKER_REDIS_CPUS=0
+# export DOCKER_REDIS_MEMORY=0
+# export DOCKER_WEB_CPUS=0
+# export DOCKER_WEB_MEMORY=0
+# export DOCKER_WORKER_CPUS=0
+# export DOCKER_WORKER_MEMORY=0
+# export DOCKER_CABLE_CPUS=0
+# export DOCKER_CABLE_MEMORY=0

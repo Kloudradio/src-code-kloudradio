@@ -2,8 +2,9 @@
 cd kloudradio
 heroku login
 docker-compose up --build -d
-docker-compose exec website rails db:create db:migrate
+docker-compose exec website rails db:serup
 git add . && git commit -m "[set-code-to-heroku]: $1"
-heroku container:push -R
-heroku run rails db:schema:load
+heroku container:push web
+heroku container:release web
+heroku container:push web
 git push heroku master

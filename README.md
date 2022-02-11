@@ -19,12 +19,15 @@ Las modificaciones pueden ser implementadas si sees miembro del equipo de desarr
 
 **Los comandos que provee este proyecto son:**
 * get-code-heroku: Al ejeecutar este comando, se obtiene en una carpeta llamada kloudradio con el código fuente de la composición del container linux compatible con heroku. También es versionado por el repositorio git de heroku. una vez descargado, el código es editable mediante los ide antes mencionados.
-* set-code-to-heroku: Este comando enciende 
+* set-code-to-heroku: Este comando enciende un nuevo codigo fuente compilado en la nube de Heroku y sincroniza los cambios y guarda el mensaje correspondiente a la ejecucion del momento.
 
-Para:
+Para obtener el código fuente y modificarlo::
 ``` [bash]
   $ systemctl start docker #(para encender el proceso de docker si no se habilito antes)
-  $ git clone https://github.com/unajpps2018asc/GIDAPPF.git
-  $ cd GIDAPPF/gidappf
+  $ git clone https://github.com/byJDP/src-code-kloudradio.git
+  $ cd src-code-kloudradio
+  $ sh get-code-heroku.sh
+  $ atom src-code-kloudredio
+  $ set-code-to-heroku "Implementa los cambios editados con atom"
+  
 ```
-
