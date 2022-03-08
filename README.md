@@ -27,7 +27,7 @@ Para obtener el código fuente y modificarlo::
   $ git clone https://github.com/byJDP/src-code-kloudradio.git
   $ cd src-code-kloudradio
   $ sh get-code-heroku.sh
-  $ atom src-code-kloudredio
+  $ atom kloudradio
   $ set-code-to-heroku "Implementa los cambios editados con atom"
   
 ```
