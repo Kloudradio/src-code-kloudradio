@@ -1,0 +1,18 @@
+setup:
+  addons:
+    - plan: heroku-postgresql
+      as: DATABASE
+build:
+  docker:
+    web: Dockerfile
+  config:
+    RAILS_ENV: development
+    NODE_ENV: development
+    # POSTGRES_DB: ${DATABASE_URL}
+    # POSTGRES_HOST: ec2-54-147-207-184.compute-1.amazonaws.com
+    # POSTGRES_PORT: 5432
+    # POSTGRES_DB: dedgi1nsoksm9d
+    # POSTGRES_USER: tkfxjblnkgyndf
+    # POSTGRES_PASSWORD: 01c52961f1255bd80d9a63f4ca07da7022d5c0af83ed07932383077ac5b454fd
+run:
+  web: bundle exec puma -C config/puma.rb
