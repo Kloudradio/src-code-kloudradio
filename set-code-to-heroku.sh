@@ -5,12 +5,10 @@ heroku login
 heroku container:login
 docker-compose up --build -d
 docker-compose exec rails db:migrate
-# git add . 
-# git commit -m "[set-code-to-heroku]: $1"
 heroku container:push web
 heroku container:release web
 cd ..
-cp -R kloudradio __code_into_heroku__
+tar --exclude={".git",".github"} -cf - kloudradio | (cd __last_code__ && tar -xf -)
 git add . 
 git commit -m "[set-code-to-heroku]: $1"
 git push

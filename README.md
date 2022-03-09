@@ -8,6 +8,7 @@ En este repositorio se guarda el acceso al código fuente de Kloudradio. Son com
 
 **Se necesita una pc con linux y los siguientes paquetes instalados:**
 * git
+* gh
 * docker
 * docker-compose
 * heroku-cli
@@ -21,13 +22,25 @@ Las modificaciones pueden ser implementadas si sees miembro del equipo de desarr
 * get-code-heroku: Al ejeecutar este comando, se obtiene en una carpeta llamada kloudradio con el código fuente de la composición del container linux compatible con heroku. También es versionado por el repositorio git de heroku. una vez descargado, el código es editable mediante los ide antes mencionados.
 * set-code-to-heroku: Este comando enciende un nuevo codigo fuente compilado en la nube de Heroku y sincroniza los cambios y guarda el mensaje correspondiente a la ejecucion del momento.
 
-Para obtener el código fuente y modificarlo::
+Para obtener el código fuente y modificarlo la primera vez:
 ``` [bash]
   $ systemctl start docker #(para encender el proceso de docker si no se habilito antes)
   $ git clone https://github.com/byJDP/src-code-kloudradio.git
   $ cd src-code-kloudradio
-  $ sh get-code-heroku.sh
+  $ ./get-code-heroku.sh
   $ atom kloudradio
+  $ gh auth login
+  $ set-code-to-heroku "Implementa los cambios editados con atom"
+  
+```
+
+
+Para modificarlo a partir de la segunda vez:
+``` [bash]
+  $ systemctl start docker #(para encender el proceso de docker si no se habilito antes)
+  $ cd src-code-kloudradio
+  $ atom kloudradio
+  $ gh auth login
   $ set-code-to-heroku "Implementa los cambios editados con atom"
   
 ```
