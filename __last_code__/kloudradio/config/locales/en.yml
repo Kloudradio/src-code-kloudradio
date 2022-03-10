@@ -30,7 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  motto: "Hi, this is our slogan. To lern moore, vist:"
+  motto: 
+    slo1: "Hi, this is our slogan. To lern moore, vist:"
     comment: "In construction..."
 
   layout:

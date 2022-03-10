@@ -30,7 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 es:
-  motto: "Hola, este es nuestro lema. Conozca mas visitando: "
+  motto: 
+    slo1: "Hola, este es nuestro lema. Conozca mas visitando: "
     comment: "En construcción..."
 
 
