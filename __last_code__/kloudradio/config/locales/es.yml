@@ -31,6 +31,8 @@
 
 es:
   motto: "Hola, este es nuestro lema. Conozca mas visitando: "
+    comment: "En construcción..."
+
 
   layout:
     footer: 
