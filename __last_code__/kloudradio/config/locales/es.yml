@@ -30,10 +30,12 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 es:
-  motto: "Hola, este es nuestro lema. Sepa mas visitando: "
+  motto: "Hola, este es nuestro lema. Conozca mas visitando: "
 
   layout:
     footer: 
       coded: "Implementado con "
       by: "por "
+    headder:
+      title: "Kloud radio reproduciendo..."
 
