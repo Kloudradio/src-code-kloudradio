@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 es:
-  hi: "Hola"
+  motto: "Hola, este es nuestro lema. Sepa mas visitando: "
 
   layout:
     footer: 
