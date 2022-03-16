@@ -34,11 +34,11 @@ export RAILS_MAX_THREADS=1
 
 # You'll always want to set POSTGRES_USER and POSTGRES_PASSWORD since the
 # postgres Docker image uses them for its default database user and password.
-# export POSTGRES_USER=byjdp
-# export POSTGRES_PASSWORD=password
-# #export POSTGRES_HOST=postgres
-# #export POSTGRES_PORT=5432
-# export POSTGRES_DB=$COMPOSE_PROJECT_NAME
+export POSTGRES_USER=byjdp
+export POSTGRES_PASSWORD=password
+export POSTGRES_HOST=postgres
+export POSTGRES_PORT=5432
+export POSTGRES_DB=$COMPOSE_PROJECT_NAME
 
 # What's your full Redis connection URL? This will be used for caching, Sidekiq,
 # and Action Cable. You can always split them up later.

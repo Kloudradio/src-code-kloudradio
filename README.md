@@ -22,25 +22,35 @@ Las modificaciones pueden ser implementadas si sees miembro del equipo de desarr
 * get-code-heroku: Al ejeecutar este comando, se obtiene en una carpeta llamada kloudradio con el código fuente de la composición del container linux compatible con heroku. También es versionado por el repositorio git de heroku. una vez descargado, el código es editable mediante los ide antes mencionados.
 * set-code-to-heroku: Este comando enciende un nuevo codigo fuente compilado en la nube de Heroku y sincroniza los cambios y guarda el mensaje correspondiente a la ejecucion del momento.
 
-Para obtener el código fuente y modificarlo la primera vez:
+1. Para obtener el código fuente:
 ``` [bash]
   $ systemctl start docker #(para encender el proceso de docker si no se habilito antes)
   $ git clone https://github.com/byJDP/src-code-kloudradio.git
   $ cd src-code-kloudradio
   $ ./get-code-heroku.sh
+  
+```
+
+2. Para modificarlo a partir de la segunda vez:
+``` [bash]
+  $ systemctl start docker #(para encender el proceso de docker si no se habilito antes)
+  $ cd src-code-kloudradio
   $ atom kloudradio
   $ gh auth login
   $ set-code-to-heroku "Implementa los cambios editados con atom"
   
 ```
 
-
-Para modificarlo a partir de la segunda vez:
+3. Para publicar una nueva versión realizando una migración de la base de datos:
 ``` [bash]
-  $ systemctl start docker #(para encender el proceso de docker si no se habilito antes)
-  $ cd src-code-kloudradio
-  $ atom kloudradio
-  $ gh auth login
-  $ set-code-to-heroku "Implementa los cambios editados con atom"
+  $ ./get_store_data.sh "tabla_1"
+  $ ./get_store_data.sh "tabla_2"
+  $ ./get_store_data.sh "tabla_3"    
+```
+Se aplican las modificaciones según el paso 2:
+``` [bash]
+  $ ./update_restore_data.sh "tabla_1"
+  $ ./update_restore_data.sh "tabla_2"
+  $ ./update_restore_data.sh "tabla_3"
   
 ```
