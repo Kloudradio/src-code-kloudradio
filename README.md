@@ -47,7 +47,7 @@ Las modificaciones pueden ser implementadas si sees miembro del equipo de desarr
   $ ./get_store_data.sh "tabla_2"
   $ ./get_store_data.sh "tabla_3"    
 ```
-Se aplican las modificaciones según el paso 2:
+  Se aplican las modificaciones según el paso 2:
 ``` [bash]
   $ ./update_restore_data.sh "tabla_1"
   $ ./update_restore_data.sh "tabla_2"
