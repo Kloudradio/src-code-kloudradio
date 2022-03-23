@@ -21,6 +21,8 @@ Las modificaciones pueden ser implementadas si sees miembro del equipo de desarr
 **Los comandos que provee este proyecto son:**
 * get-code-heroku: Al ejeecutar este comando, se obtiene en una carpeta llamada kloudradio con el código fuente de la composición del container linux compatible con heroku. También es versionado por el repositorio git de heroku. una vez descargado, el código es editable mediante los ide antes mencionados.
 * set-code-to-heroku: Este comando enciende un nuevo codigo fuente compilado en la nube de Heroku y sincroniza los cambios y guarda el mensaje correspondiente a la ejecucion del momento.
+* get_store_data: Comando para obtener el backup en caliente de la base de daatos.
+* update_restore_data: Comando para restaurar datos de la base de datos en caaso de nueva version de la app.
 
 1. Para obtener el código fuente:
 ``` [bash]
