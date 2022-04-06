@@ -1,6 +1,7 @@
 #!/bin/bash
 cd kloudradio
 cat .env | sed -i -e 's/RAILS_ENV=development/RAILS_ENV=production/g' -e 's/NODE_ENV=development/NODE_ENV=production/g' .env
+cat .env | sed -i -e 's/export KLOUDRADIO_HOST=localhost/export KLOUDRADIO_HOST=kloudradio.herokuapp.com/g'  .env
 heroku login
 heroku container:login
 docker-compose up --build -d
