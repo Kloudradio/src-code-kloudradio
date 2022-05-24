@@ -5,7 +5,8 @@ cat .env | sed -i -e 's/export KLOUDRADIO_HOST=localhost/export KLOUDRADIO_HOST=
 heroku login
 heroku container:login
 docker-compose up --build -d
-docker-compose exec rails db:setup
+docker-compose exec rails db:create
+docker-compose exec rails db:migrate
 git add . 
 git commit -m "[set-code-to-heroku]: $1"
 git push heroku main
