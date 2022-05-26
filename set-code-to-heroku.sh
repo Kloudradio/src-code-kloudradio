@@ -5,13 +5,15 @@ cat .env | sed -i -e 's/export KLOUDRADIO_HOST=localhost/export KLOUDRADIO_HOST=
 AUXSECRET=$( openssl rand -base64 32 )
 cat .env | sed -i -e "s#export SECRET_KEY_BASE=insecure_key_for_dev#export SECRET_KEY_BASE=$AUXSECRET#" .env
 heroku login
+AUXDB=$( heroku config:get DATABASE_URL )
+cat .env | sed -i -e "s#export DATABASE_URL=null#export SECRET_KEY_BASE=$AUXDB#" .env
 heroku container:login
 docker-compose up --build -d &&
 docker-compose exec rails db:create &&
 docker-compose exec rails db:migrate &&
-git add . &&
-git commit -m "[Kloudradio committer]: $1" &&
-git push heroku main
+# git add . &&
+# git commit -m "[Kloudradio committer]: $1" &&
+# git push heroku main
 heroku container:push web -a kloudradio
 heroku container:release web -a kloudradio
 heroku config:set SECRET_KEY_BASE=$AUXSECRET -a kloudradio
