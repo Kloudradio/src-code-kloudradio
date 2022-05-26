@@ -14,7 +14,7 @@ git commit -m "[Kloudradio committer]: $1" &&
 git push heroku main
 heroku container:push web
 heroku container:release web
-heroku config:set SECRET_KEY_BASE=$AUXSECRET
+#heroku config:set SECRET_KEY_BASE=$AUXSECRET
 heroku run rake db:create
 heroku run rake db:migrate
 echo "Secret Baase es $AUXSECRET"
