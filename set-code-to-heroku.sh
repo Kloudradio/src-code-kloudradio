@@ -12,11 +12,11 @@ docker-compose exec rails db:migrate &&
 git add . &&
 git commit -m "[Kloudradio committer]: $1" &&
 git push heroku main
-heroku container:push web
-heroku container:release web
-#heroku config:set SECRET_KEY_BASE=$AUXSECRET
-heroku run rake db:create
-heroku run rake db:migrate
+heroku container:push web -a kloudradio
+heroku container:release web -a kloudradio
+heroku config:set SECRET_KEY_BASE=$AUXSECRET -a kloudradio
+heroku run rake db:create  -a kloudradio
+heroku run rake db:migrate  -a kloudradio
 echo "Secret Baase es $AUXSECRET"
 cat .env | sed -i -e 's/RAILS_ENV=production/RAILS_ENV=development/g' -e 's/NODE_ENV=production/NODE_ENV=development/g' .env
 cat .env | sed -i -e 's/export KLOUDRADIO_HOST=kloudradio.herokuapp.com/export KLOUDRADIO_HOST=localhost/g'  .env
