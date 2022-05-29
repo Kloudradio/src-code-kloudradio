@@ -14,12 +14,12 @@ heroku login
 docker-compose up --build -d &&
 docker-compose exec rails db:create &&
 docker-compose exec rails db:migrate &&
-git add . &&
-git commit -m "[Kloudradio committer]: $1" &&
-git push heroku main
-# heroku container:push web -a kloudradio
-# heroku container:release web -a kloudradio
-# heroku config:set SECRET_KEY_BASE=$AUXSECRET -a kloudradio
+# git add . &&
+# git commit -m "[Kloudradio committer]: $1" &&
+# git push heroku main
+heroku container:push web -a kloudradio
+heroku container:release web -a kloudradio
+heroku config:set SECRET_KEY_BASE=$AUXSECRET -a kloudradio
 # heroku run rake db:create  -a kloudradio
 heroku run rake db:migrate  -a kloudradio
 # echo "Secret Base es $AUXSECRET"
